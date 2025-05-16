@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+     html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      overflow-x: hidden;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      background: #1a1a1a;
+      padding: 1.5rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+    header h2 {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #00ffc8;
+      letter-spacing: 2px;
+      text-align:center;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 2rem;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #00ffc8;
+    }
+    @media (max-width: 768px) {
+  #home h1 {
+    font-size: 2.2rem;
+  }
+  nav a {
+    margin-left: 1rem;
+    font-size: 0.9rem;
+  }
+  .resume-info {
+    width: 90%;
+  }
+}
+
+    section {
+      padding: 6rem 10%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .center-text {
+      text-align: center;
+    }
+    /* Home */
+   #home {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #1f1f1f, #292929);
+  padding: 0 5%;
+}
+
+.home-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.home-text {
+  flex: 1 1 500px;
+}
+
+.home-text h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+}
+
+.home-text p {
+  font-size: 1.3rem;
+  max-width: 600px;
+  margin-bottom: 2rem;
+}
+
+.home-image {
+  flex: 1 1 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* Responsive for mobile */
+@media (max-width: 768px) {
+  .home-content {
+    flex-direction: column-reverse;
+    align-items: center;
+    text-align: center;
+  }
+
+  .home-text h1 {
+    font-size: 2.2rem;
+  }
+
+  .home-text p {
+    font-size: 1rem;
+  }
+}
+
+     /* About */
+    #about p {
+      max-width: 700px;
+      margin: 1rem auto 0 auto;
+      font-size: 1.15rem;
+      line-height: 1.6;
+      color: #ccc;
+    }
+    /* Resume */
+   .resume-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.resume-image {
+  flex: 1 1 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.resume-image img {
+  max-width: 100%;
+  width: 300px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #00ffc8;
+}
+
+.resume-info {
+  background: #222;
+  border-radius: 10px;
+  padding: 2rem;
+  flex: 1 1 400px;
+  color: #ddd;
+  text-align: left;
+}
+
+    }
+    .skills-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 2rem;
+
+    }
+    .skill {
+      background: #222;
+      padding: 1rem 1.5rem;
+      border-radius: 30px;
+      font-weight: 500;
+      font-size: 1.1rem;
+      color: #00ffc8;
+      box-shadow: 0 0 10px #00ffc8;
+      transition: transform 0.3s;
+    }
+    .skill:hover {
+      transform: scale(1.1);
+    }
+    /* Services */
+    #services {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+.skills-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.skill-box {
+  background: #222;
+  padding: 1rem 1.5rem;
+  border-radius: 20px;
+  color: #00ffc8;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 0 10px #00ffc8;
+  transition: transform 0.3s ease;
+  width: 150px; /* Add this */
+  text-align: center; /* Add this */
+}
+
+
+.skill-box:hover {
+  transform: scale(1.1);
+}
+
+.services-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.service-card {
+  background: #222;
+  padding: 2rem;
+  border-radius: 10px;
+  /* Remove width: 280px; */
+  box-shadow: 0 0 10px #00ffc8;
+  color: #ccc;
+  transition: transform 0.3s;
+  text-align: center;
+  flex: 1 1 280px; /* Responsive */
+  max-width: 320px;
+}
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px #00ffc8;
+  color: #00ffc8;
+}
+
+    .skills-container,
+.services-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem; /* Keep this consistent for both */
+}
+
+
+    .service-card {
+      background: #222;
+      border-radius: 10px;
+      padding: 2rem;
+      width: 280px;
+      box-shadow: 0 0 10px #00ffc8;
+      transition: transform 0.3s;
+      color: #ccc;
+      text-align: center;
+    }
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px #00ffc8;
+      color: #00ffc8;
+    }
+    .service-card h3 {
+      margin-bottom: 1rem;
+      font-weight: 700;
+      color: #00ffc8;
+    }
+    /* Projects */
+    #projects {
+      margin-top: 2rem;
+    }
+    .project-card {
+      background: #222;
+      padding: 2rem;
+      border-radius: 10px;
+      margin: 1rem auto;
+      width: 80%;
+      transition: transform 0.3s;
+      color: #ddd;
+    }
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px #00ffc8;
+      color: #00ffc8;
+    }
+    /* Contact */
+    #contact {
+      text-align: center;
+    }
+    #contact a {
+      color: #00ffc8;
+      text-decoration: none;
+    }
+
+    #contact a:hover {
+      text-decoration: underline;
+    }
+
+    #contact p {
+      font-size: 1.1rem;
+      margin-top: 1rem;
+      color: #ccc;
+    }
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #1a1a1a;
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 4rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h2>My Portfolio</h2>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#resume">Resume</a>
+      <a href="#skills">Skills</a>
+      <a href="#services">Services</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header> 
+    <!-- Home -->
+<section id="home">
+  <div class="home-content">
+    <div class="home-text">
+      <h1>Hello, I'm Krishna Keerthana</h1>
+      <p>Creative Developer & Designer building interactive experiences with GSAP and Three.js</p>
+    </div>
+    <div class="home-image">
+      <!-- Use an animated GIF or Lottie animation -->
+      <img src="C:\Users\keert\OneDrive\Desktop\abcd_files\image/img3.jpg" alt="img3"/>
+      <!-- Example Lottie animation:
+      <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_jcikwtux.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+      -->
+    </div>
+  </div>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+</section>
+
+
+  <!-- About -->
+  <section id="about" class="center-text">
+    <h2>About Me</h2>
+    <p>
+      I am a passionate web developer with a keen interest in creating visually stunning and user-friendly websites. With experience in modern web technologies like GSAP and Three.js, I aim to deliver engaging and innovative digital experiences.
+    </p>
+  </section>
+
+  <!-- Resume -->
+ <section id="resume" class="center-text">
+  <h2>My Resume</h2>
+  <div class="resume-container">
+    <div class="resume-image">
+      <img src="C:/Users/keert/OneDrive/Desktop/abcd_files/image/img3.jpg" alt="Resume Image" />
+    </div>
+    <div class="resume-info">
+      <p><strong>Name:</strong> R.Krishna Keerthana</p>
+      <p><strong>Email:</strong> keerthi.keerth2004@gmail.com</p>
+      <p><strong>Phone:</strong> +91-8688311916</p>
+      <p><strong>College:</strong> Chadalawada Ramanamma Engineering College</p>
+      <p><strong>Degree:</strong> B.Tech in Computer Science</p>
+      <p><strong>Projects:</strong> Interactive portfolios, animated landing pages, UI libraries</p>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Skills -->
+<section id="skills" class="center-text">
+  <h2>Skills</h2>
+  <div class="skills-container">
+    <div class="skill-box">HTML</div>
+    <div class="skill-box">CSS</div>
+    <div class="skill-box">JavaScript</div>
+    <div class="skill-box">GSAP</div>
+    <div class="skill-box">Three.js</div>
+    <div class="skill-box">React</div>
+    <div class="skill-box">Node.js</div>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="services" class="center-text">
+  <h2>Services</h2>
+  <div class="services-container">
+    <div class="service-card">
+      <h3>Web Development</h3>
+      <p>Building responsive and performant websites using modern frameworks and tools.</p>
+    </div>
+    <div class="service-card">
+      <h3>UI/UX Design</h3>
+      <p>Designing clean and intuitive user interfaces to enhance user experience.</p>
+    </div>
+    <div class="service-card">
+      <h3>3D Animations</h3>
+      <p>Creating immersive 3D web experiences using Three.js and WebGL.</p>
+    </div>
+  </div>
+</section>
+
+
+
+  <!-- Projects -->
+  <section id="projects" class="center-text">
+  <h2>My Projects</h2>
+  <div class="project-card">
+    <h3>Interactive 3D Portfolio</h3>
+    <p>Built using Three.js and GSAP to create immersive user experience.</p>
+  </div>
+  <div class="project-card">
+    <h3>Animated Landing Page</h3>
+    <p>Modern UI design with smooth scroll and transitions.</p>
+  </div>
+ 
+  <!-- Contact -->
+<section id="contact" class="center-text">
+  <h2>Contact Me</h2>
+  <p><strong>Email:</strong> keerthi.keerth2004@gmail.com</p>
+  <p><strong>Phone:</strong> +91-8688311916</p>
+  <p><strong>Address:</strong>Tirupati,Andhra Pradesh, India</p>
+  <p><strong>Website:</strong> <a href="https://www.myportfolio.com" target="_blank" style="color:#00ffc8; text-decoration: none;">www.myportfolio.com</a></p>
+</section>
+
+
+  <footer>
+    <p>Completion Certificate will be issued on your internship end date.</p>
+    <p>CodTech © 2025</p>
+  </footer>
+
+  <!-- GSAP Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script>
+    // Animate home section
+     gsap.from(".skill-box", { // instead of .skill
+     scrollTrigger: {
+    trigger: "#skills",
+    start: "top 80%"
+  },
+  duration: 1,
+  opacity: 0,
+  y: 30,
+  stagger: 0.2,
+  ease: "power2.out"
+});
+
+    gsap.from("#home h1", {
+      duration: 1.5,
+      y: -50,
+      opacity: 0
+
+,
+      ease: "power4.out"
+    });
+    gsap.from("#home p", {
+      duration: 1.5,
+      y: 50,
+      opacity: 0,
+      delay: 0.5,
+      ease: "power4.out"
+    });
+
+    // Animate about text
+    gsap.from("#about p", {
+      scrollTrigger: {
+        trigger: "#about",
+        start: "top 80%"
+      },
+      duration: 1,
+      x: -100,
+      opacity: 0,
+      ease: "power2.out"
+    });
+
+    // Animate resume info
+    gsap.from(".resume-info", {
+      scrollTrigger: {
+        trigger: "#resume",
+        start: "top 80%"
+      },
+      duration: 1,
+      y: 50,
+      opacity: 0,
+      ease: "power2.out"
+    });
+
+    // Animate skills
+    gsap.from(".skill", {
+      scrollTrigger: {
+        trigger: "#skills",
+        start: "top 80%"
+      },
+      duration: 1,
+      opacity: 0,
+      y: 30,
+      stagger: 0.2,
+      ease: "power2.out"
+    });
+
+    // Animate services cards
+    gsap.from(".service-card", {
+      scrollTrigger: {
+        trigger: "#services",
+        start: "top 80%"
+      },
+      duration: 1,
+      y: 50,
+      opacity: 0,
+      stagger: 0.3,
+      ease: "power2.out"
+    });
+
+    // Animate projects cards
+    gsap.from(".project-card", {
+      scrollTrigger: {
+        trigger: "#projects",
+        start: "top 80%"
+      },
+      duration: 1,
+      opacity: 0,
+      y: 100,
+      stagger: 0.3,
+      ease: "power2.out"
+    });
+
+    // Animate contact
+    gsap.from("#contact p", {
+      scrollTrigger: {
+        trigger: "#contact",
+        start: "top 90%"
+      },
+      duration: 1,
+      opacity: 0,
+      y: 30,
+      stagger: 0.3,
+      ease: "power2.out"
+    });
+  </script>
+</body>
+</html>
+```
+
