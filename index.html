@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Animated Portfolio</title>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+  
+  <!-- Font Awesome for social icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  
+  <style>
+    /* Reset & Base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #e0e0e0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    body.light-mode {
+      background: #f9f9f9;
+      color: #222;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      justify-content: center;
+      z-index: 1000;
+      padding: 15px 0;
+      backdrop-filter: blur(8px);
+    }
+    nav.light-mode {
+      background: rgba(255,255,255,0.9);
+    }
+    nav .nav-container {
+      width: 90%;
+      max-width: 1100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #ffd700;
+      font-weight: 600;
+      font-size: 1.05rem;
+      position: relative;
+      transition: color 0.3s;
+    }
+    nav ul li a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      background: #ffd700;
+      left: 0;
+      bottom: -4px;
+      transition: 0.3s;
+    }
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: #fff;
+    }
+    nav ul li a:hover::after,
+    nav ul li a.active::after {
+      width: 100%;
+    }
+    
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background: #ffd700;
+      border-radius: 2px;
+    }
+    
+    /* Responsive Nav */
+    @media (max-width: 768px) {
+      nav ul {
+        position: fixed;
+        top: 60px;
+        right: 0;
+        background: rgba(0,0,0,0.85);
+        height: calc(100vh - 60px);
+        width: 220px;
+        flex-direction: column;
+        align-items: start;
+        padding: 20px;
+        gap: 15px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+      }
+      nav ul.open {
+        transform: translateX(0);
+      }
+      nav ul li a {
+        font-size: 1.3rem;
+      }
+      .hamburger {
+        display: flex;
+      }
+    }
+    
+    /* Theme Toggle Button */
+    .theme-toggle {
+      position: fixed;
+      top: 15px;
+      right: 20px;
+      background: #ffd700;
+      color: #222;
+      border: none;
+      padding: 10px 16px;
+      font-weight: 600;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 1100;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    body.light-mode .theme-toggle {
+      background: #222;
+      color: #ffd700;
+    }
+
+    /* Header / Home */
+    header {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      padding: 0 20px;
+      gap: 20px;
+    }
+    /* Removed profile-img styles since image is removed */
+    header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #fff;
+      min-height: 50px;
+    }
+    header p {
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: #ffd700cc;
+      min-height: 30px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* Sections with card style */
+    section {
+      max-width: 900px;
+      margin: 40px auto;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 30px 40px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      transition: background 0.3s;
+    }
+    body.light-mode section {
+      background: #fff;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+      color: #222;
+    }
+    h2 {
+      font-weight: 700;
+      font-size: 2rem;
+      color: #ffd700;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    h2::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 70px;
+      height: 4px;
+      background: #ffd700;
+      border-radius: 2px;
+    }
+
+    ul {
+      list-style: disc inside;
+      line-height: 1.6;
+    }
+    
+    /* Project Cards */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+      gap: 25px;
+    }
+    .project-card {
+      background: rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 25px #ffd700bb;
+      background: rgba(255,255,255,0.15);
+    }
+    .project-card h3 {
+      margin-bottom: 15px;
+      color: #ffd700;
+    }
+
+    /* Contact form */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    form input, form textarea {
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      resize: none;
+      box-shadow: 0 0 10px transparent;
+      transition: box-shadow 0.3s;
+    }
+    form input:focus, form textarea:focus {
+      box-shadow: 0 0 10px #ffd700;
+      background-color: #222;
+      color: #fff;
+    }
+    form button {
+      width: 150px;
+      padding: 12px;
+      font-weight: 700;
+      background: #ffd700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #222;
+      transition: background-color 0.3s;
+    }
+    form button:hover {
+      background: #e6c200;
+    }
+
+    /* Social Icons */
+    .social-icons {
+      margin-top: 15px;
+      display: flex;
+      gap: 20px;
+      font-size: 1.6rem;
+    }
+    .social-icons a {
+      color: #ffd700;
+      transition: color 0.3s, transform 0.3s;
+    }
+    .social-icons a:hover {
+      color: #fff;
+      transform: scale(1.2);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: #bbb;
+      background: rgba(0,0,0,0.6);
+      font-size: 0.9rem;
+      user-select: none;
+    }
+    body.light-mode footer {
+      background: #f0f0f0;
+      color: #444;
+    }
+
+    /* Three.js canvas */
+    #bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.3;
+    }
+  </style>
+</head>
+<body>
+  <button class="theme-toggle" aria-label="Toggle dark/light mode">Toggle Theme</button>
+  
+  <nav>
+    <div class="nav-container">
+      <div class="hamburger" aria-label="Toggle menu" tabindex="0">
+        <div></div><div></div><div></div>
+      </div>
+      <ul>
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#resume">Resume</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <canvas id="bg"></canvas>
+
+  <header id="home">
+    <!-- Profile image removed -->
+    <h1 id="typed-name"></h1>
+    <p id="typed-role"></p>
+  </header>
+
+  <section id="about" tabindex="0">
+    <h2>About Me</h2>
+    <p>
+      I am a passionate developer creating dynamic web applications with modern
+      animations, responsive design, and interactive 3D experiences.
+    </p>
+  </section>
+
+  <section id="resume" tabindex="0">
+    <h2>Resume</h2>
+    <ul>
+      <li><strong>Name:</strong> Rentala Krishna Keerthana</li>
+      <li><strong>Email:</strong> keerthi.keerth2004@gmail.com</li>
+      <li><strong>Phone:</strong> +91-8688311916</li>
+      <li><strong>College:</strong> Chadalawada Ramanamma Engineering College </li>
+      <li><strong>Degree:</strong> B.Tech in Computer Science</li>
+      <li><strong>Year of Graduation:</strong> 2026</li>
+      <li><strong>Location:</strong> Tirupati, Andhra Pradesh, India</li>
+    </ul>
+    <div style="margin-top: 20px;">
+      <a
+        href="resume.pdf"
+        download
+        style="
+          background: #ffd700;
+          color: #222;
+          padding: 10px 20px;
+          border-radius: 6px;
+          font-weight: 600;
+          text-decoration: none;
+          box-shadow: 0 5px 10px #b38600;
+          display: inline-block;
+          transition: background 0.3s;
+        "
+        >Download Resume</a
+      >
+    </div>
+  </section>
+
+  <section id="skills" tabindex="0">
+    <h2>Skills</h2>
+    <ul>
+      <li>HTML, CSS, JavaScript</li>
+      <li>React, Vue, Angular</li>
+      <li>Node.js, Express</li>
+      <li>Python, Django</li>
+      <li>Databases: MySQL, MongoDB</li>
+      <li>3D & Animation: Three.js, GSAP</li>
+    </ul>
+  </section>
+
+  <section id="services" tabindex="0">
+    <h2>Services</h2>
+    <ul>
+      <li>Web Development</li>
+      <li>UI/UX Design</li>
+      <li>3D Animation & Visualizations</li>
+      <li>Consultation & Training</li>
+    </ul>
+  </section>
+
+  <section id="projects" tabindex="0">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card" tabindex="0" aria-label="Project One: Portfolio Website">
+        <h3>Portfolio Website</h3>
+        <p>A personal portfolio website with 3D animations and interactive UI.</p>
+        <a href="https://github.com/keerthana/portfolio" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+      </div>
+      <div class="project-card" tabindex="0" aria-label="Project Two: E-commerce App">
+        <h3>E-commerce App</h3>
+        <p>A full-stack e-commerce app with user authentication and payment integration.</p>
+        <a href="https://github.com/keerthana/ecommerce-app" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+      </div>
+      <div class="project-card" tabindex="0" aria-label="Project Three: 3D Game">
+        <h3>3D Game</h3>
+        <p>A browser-based 3D game built with Three.js and WebGL.</p>
+        <a href="https://github.com/keerthana/3d-game" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" tabindex="0">
+    <h2>Contact Me</h2>
+    <form id="contact-form" aria-label="Contact form">
+      <input type="text" id="name" name="name" placeholder="Your Name" required aria-required="true" />
+      <input type="email" id="email" name="email" placeholder="Your Email" required aria-required="true" />
+      <textarea id="message" name="message" rows="5" placeholder="Your Message" required aria-required="true"></textarea>
+      <button type="submit">Send</button>
+    </form>
+    <div class="social-icons" aria-label="Social media links">
+      <a href="https://linkedin.com/in/keerthana" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/keerthana" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://twitter.com/keerthana" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Rentala Krishna Keerthana. All rights reserved.
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r148/three.min.js"></script>
+  <script>
+    // Hamburger toggle
+    const hamburger = document.querySelector('.hamburger');
+    const navUl = document.querySelector('nav ul');
+    hamburger.addEventListener('click', () => {
+      navUl.classList.toggle('open');
+    });
+    hamburger.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        navUl.classList.toggle('open');
+      }
+    });
+
+    // Smooth active link on scroll
+    const sections = document.querySelectorAll('section, header');
+    const navLinks = document.querySelectorAll('nav ul li a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 80;
+        if (pageYOffset >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').slice(1) === current) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Typed.js for name and role
+    const typedName = new Typed('#typed-name', {
+      strings: ['Rentala Krishna Keerthana'],
+      typeSpeed: 120,
+      showCursor: false,
+    });
+    const typedRole = new Typed('#typed-role', {
+      strings: ['Full Stack Developer', 'UI/UX Enthusiast', '3D Artist'],
+      typeSpeed: 50,
+      backSpeed: 40,
+      backDelay: 1500,
+      loop: true,
+    });
+
+    // Theme toggle
+    const themeToggle = document.querySelector('.theme-toggle');
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      document.querySelector('nav').classList.toggle('light-mode');
+    });
+
+    // Simple Three.js Background animation
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000
+    );
+    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg'), alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.position.z = 50;
+
+    const geometry = new THREE.IcosahedronGeometry(10, 1);
+    const material = new THREE.MeshBasicMaterial({ color: 0xffd700, wireframe: true, opacity: 0.3, transparent: true });
+    const icosahedron = new THREE.Mesh(geometry, material);
+    scene.add(icosahedron);
+
+    function animate() {
+      requestAnimationFrame(animate);
+      icosahedron.rotation.x += 0.002;
+      icosahedron.rotation.y += 0.004;
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>
